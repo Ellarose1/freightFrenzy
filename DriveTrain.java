@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Classes;
 
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -43,7 +43,7 @@ public class DriveTrain {
 
     public DriveTrain(){}
 
-    public void init( hardwareRobot robot, LinearOpMode opMode){
+    public void init(hardwareRobot robot, LinearOpMode opMode){
         currentOpMode   = opMode;
         leftFrontMotor  = robot.leftFrontMotor;
         leftBackMotor   = robot.leftBackMotor;

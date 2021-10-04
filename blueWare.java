@@ -37,9 +37,9 @@ import org.firstinspires.ftc.teamcode.Classes.DriveTrain;
 import org.firstinspires.ftc.teamcode.Classes.hardwareRobot;
 
 
-@Autonomous(name="encoderTest", group="Pushbot")
+@Autonomous(name="blueWare", group="Pushbot")
 //@Disabled
-public class encoderTest extends LinearOpMode {
+public class blueWare extends LinearOpMode {
 
     /* Declare OpMode members. */
     private hardwareRobot robot   = new hardwareRobot();   // Use a Pushbot's hardware
@@ -57,18 +57,9 @@ public class encoderTest extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        driveTrain.turnToDegree(90,.05,2.0);
-        driveTrain.driveToDistance(-5.0,1.5, 0.5);
-        driveTrain.turnToDegree(-90,.05,2.0);
-        driveTrain.driveToDistance(5.0,1.5, 0.5);
-
-        driveTrain.strafeToDistance(3,.5,2.0);
-        driveTrain.strafeToDistance(-3,.5,2);
-
-
+        driveTrain.driveToDistance(-5.0,1.5, 1.0);
 
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
-    }
-}
+    }}

@@ -26,7 +26,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Classes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -46,7 +46,7 @@ public class hardwareRobot
     public DcMotor  leftBackMotor     = null;
     public DcMotor  rightBackMotor     = null;
     public DcMotor  armMotor = null;
-    public Servo  testServo = null;
+    public Servo  clawServo = null;
 
     //public Servo    servoTester    = null;
 
@@ -71,7 +71,7 @@ public class hardwareRobot
         leftBackMotor    = hwMap.get(DcMotor.class, "leftBackMotor");
         rightBackMotor    = hwMap.get(DcMotor.class, "rightBackMotor");
         armMotor    = hwMap.get(DcMotor.class, "armMotor");
-        testServo = hwMap.get(Servo.class, "testServo");
+        clawServo = hwMap.get(Servo.class, "clawServo");
 
 
 
@@ -90,7 +90,7 @@ public class hardwareRobot
         rightBackMotor.setPower(0);
         armMotor.setPower(0);
 
-        testServo. setPosition(0.0);
+        clawServo.setPosition(0.0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -100,9 +100,6 @@ public class hardwareRobot
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        // Define and initialize ALL installed servos.
-        //servoTester  = hwMap.get(Servo.class, "servoTester");
-        //servoTester.setPosition(1.0);
 
 
         // set up IMU

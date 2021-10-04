@@ -27,16 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Classes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
 
 @TeleOp(name="teleopController", group="Linear Opmode")
 //@Disabled
@@ -44,40 +43,24 @@ public class teleop extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
+    private arm arm = new arm ();
+    hardwareRobot robot = new hardwareRobot();
+
 
     private DcMotor leftFrontMotor = null;
     private DcMotor rightFrontMotor = null;
     private DcMotor leftBackMotor = null;
     private DcMotor rightBackMotor = null;
     private DcMotor armMotor = null;
-    private Servo testServo = null;
+    private Servo clawServo = null;
 
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        leftFrontMotor  = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-        rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-        leftBackMotor  = hardwareMap.get(DcMotor.class, "leftBackMotor");
-        rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-        armMotor = hardwareMap.get(DcMotor.class, "armMotor");
-        testServo = hardwareMap.get(Servo.class, "testServo");
-
+        robot.init(hardwareMap);
         double speedVariance = 1;
-
-
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
-        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
-        leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
-        armMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -111,21 +94,23 @@ public class teleop extends LinearOpMode {
             rightFrontMotor.setPower(rightfrontPower);
             rightBackMotor.setPower(rightbackPower);
 
-            if (gamepad1.x){
+
+
+            if (gamepad1.x) {
+                arm.clawOpen();
+            }
+            if (gamepad1.y) {
+                arm.clawClosed();
+            }
+
+
+
+            if (gamepad1.a){
                 speedVariance =0.5;
             }
 
-            if (gamepad1.y){
+            if (gamepad1.b){
                 speedVariance =1.0;
-            }
-
-
-            if (gamepad1.a) {
-                testServo.setPosition(1.0);
-            }
-
-            if (gamepad1.b) {
-                testServo.setPosition (0.0);
             }
 
 
@@ -135,7 +120,7 @@ public class teleop extends LinearOpMode {
             if (gamepad1.dpad_down) {
                 armMotor.setPower(-1.0);
             }
-            if (gamepad1.dpad_right) {
+            else {
                 armMotor.setPower(0.0);
             }
 
